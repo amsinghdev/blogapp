@@ -1,6 +1,7 @@
 package com.amit.blogapp.controller;
 
 import com.amit.blogapp.payload.PostDto;
+import com.amit.blogapp.payload.PostResponse;
 import com.amit.blogapp.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,11 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostDto> getAllPost(){
-        return postService.getAllPost();
+    public PostResponse getAllPost(
+            @RequestParam(value="pageNo",defaultValue = "0",required = false) int pageNo,
+            @RequestParam(value = "pageSize",defaultValue = "10",required = false) int pageSize
+    ){
+        return postService.getAllPost(pageNo,pageSize);
     }
 
     @GetMapping("/{id}")
