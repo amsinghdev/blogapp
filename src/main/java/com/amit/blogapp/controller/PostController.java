@@ -3,6 +3,7 @@ package com.amit.blogapp.controller;
 import com.amit.blogapp.payload.PostDto;
 import com.amit.blogapp.payload.PostResponse;
 import com.amit.blogapp.service.PostService;
+import com.amit.blogapp.utils.AppConstant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,12 @@ public class PostController {
 
     @GetMapping
     public PostResponse getAllPost(
-            @RequestParam(value="pageNo",defaultValue = "0",required = false) int pageNo,
-            @RequestParam(value = "pageSize",defaultValue = "10",required = false) int pageSize
+            @RequestParam(value="pageNo",defaultValue = AppConstant.DEFAULT_PAGE_NUMBER,required = false) int pageNo,
+            @RequestParam(value = "pageSize",defaultValue = AppConstant.DEFAULT_PAGE_SIZE,required = false) int pageSize,
+            @RequestParam(value="sortBy",defaultValue = AppConstant.DEFAULT_SORT_BY,required = false) String sortBy,
+            @RequestParam(value = "sortDir",defaultValue = AppConstant.DEFAULT_SORT_DIR,required = false) String sortDir
     ){
-        return postService.getAllPost(pageNo,pageSize);
+        return postService.getAllPost(pageNo,pageSize,sortBy,sortDir);
     }
 
     @GetMapping("/{id}")
