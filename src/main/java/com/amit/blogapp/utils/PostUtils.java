@@ -5,12 +5,10 @@ import com.amit.blogapp.payload.PostDto;
 
 public  class PostUtils {
     public static Post mapToEntity(PostDto postDto){
-        System.out.println("postDto...."+postDto.toString());
         Post post = new Post();
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
         post.setContent(postDto.getContent());
-        System.out.println("post...."+post.toString());
         return post;
     }
     public static PostDto mapToDto(Post post){
