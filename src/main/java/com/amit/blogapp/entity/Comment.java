@@ -3,6 +3,7 @@ package com.amit.blogapp.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -23,5 +24,6 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="post_id",nullable = false)
+    @ToString.Exclude
     private Post post;
 }

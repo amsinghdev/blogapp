@@ -4,6 +4,7 @@ package com.amit.blogapp.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,5 +26,6 @@ public class Post {
     private String content;
 
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
     private Set<Comment> comments = new HashSet<>();
 }
