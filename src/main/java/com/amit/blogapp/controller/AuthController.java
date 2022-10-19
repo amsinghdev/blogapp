@@ -45,19 +45,19 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(),loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User signed-in sucessfully", HttpStatus.OK);
+        return new ResponseEntity<>("User signed-in successfully", HttpStatus.OK);
     }
 
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@RequestBody SignUpDto signUpDto){
         // check if username exists in db
         if(userRepository.existsByUsername(signUpDto.getUsername())){
-            return new ResponseEntity<>("username alreday taken !",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("username already taken !",HttpStatus.BAD_REQUEST);
         }
 
         //check if email exists in db
         if(userRepository.existsByUsername(signUpDto.getEmail())){
-            return new ResponseEntity<>("email alreday taken !",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("email already taken !",HttpStatus.BAD_REQUEST);
         }
 
         // create user object
@@ -71,6 +71,6 @@ public class AuthController {
         Role roles = roleRepository.findByName("ROLE_ADMIN").get();
         user.setRoles(Collections.singleton(roles));
         userRepository.save(user);
-        return new ResponseEntity<>("User registered sucessfully",HttpStatus.CREATED);
+        return new ResponseEntity<>("User registered successfully",HttpStatus.CREATED);
     }
 }
